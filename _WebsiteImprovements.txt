@@ -1,3 +1,4 @@
-Apply new up arrow to all subpages
-Reduce Line Height of Clients for double rows (i.e. Argylle)
-Smaller margins for contact page (both hero blurb and form)
+Home page margins still need to be tweaked
+UE is too wide compared to other pages
+Contact page can be shifted 2% to the left
+Increase width of hero blurbs a tiny bit (5%?)

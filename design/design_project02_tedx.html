@@ -532,25 +532,15 @@ mediaQuery.addEventListener('change', checkLightbox);
 
 // ===== PREMIUM DRAG + INERTIA GALLERY =====
 
-const slider = document.querySelector('.project-section-row.three-col.hybrid');
+// ===== MOBILE GALLERY ARROWS + DRAG =====
+const galleryWrapper = document.querySelector('.gallery-wrapper.mobile-only');
 
-if (slider) {
+if (galleryWrapper) {
+  const slider = galleryWrapper.querySelector('.project-section-row');
+  const leftArrow = galleryWrapper.querySelector('.gallery-arrow.left');
+  const rightArrow = galleryWrapper.querySelector('.gallery-arrow.right');
 
-  const wrapper = slider.closest('.gallery-wrapper');
-  const leftArrow = wrapper.querySelector('.gallery-arrow.left');
-  const rightArrow = wrapper.querySelector('.gallery-arrow.right');
-
-  let isDown = false;
-  let startX;
-  let scrollLeft;
-  let velocity = 0;
-  let lastX;
-  let momentumID;
-
-  // ======================
-  // Arrow Navigation
-  // ======================
-
+  // Arrow navigation
   leftArrow.addEventListener('click', () => {
     slider.scrollBy({ left: -slider.offsetWidth * 0.8, behavior: 'smooth' });
   });
@@ -559,30 +549,25 @@ if (slider) {
     slider.scrollBy({ left: slider.offsetWidth * 0.8, behavior: 'smooth' });
   });
 
-  // ======================
-  // Drag Start
-  // ======================
+  // Optional: drag functionality
+  let isDown = false;
+  let startX, scrollLeft, velocity = 0, lastX, momentumID;
 
   slider.addEventListener('mousedown', (e) => {
     isDown = true;
     slider.classList.add('dragging');
-
     startX = e.pageX;
     lastX = startX;
     scrollLeft = slider.scrollLeft;
-
     cancelMomentumTracking();
   });
 
   slider.addEventListener('mousemove', (e) => {
     if (!isDown) return;
-
     e.preventDefault();
-
     const x = e.pageX;
-    const walk = (x - startX);
+    const walk = x - startX;
     slider.scrollLeft = scrollLeft - walk;
-
     velocity = x - lastX;
     lastX = x;
   });
@@ -609,12 +594,10 @@ if (slider) {
   function momentumLoop() {
     slider.scrollLeft -= velocity;
     velocity *= 0.95;
-
     if (Math.abs(velocity) > 0.5) {
       momentumID = requestAnimationFrame(momentumLoop);
     }
   }
-
 }
 </script>
 
