@@ -607,30 +607,39 @@ body {
 }
 
 /* ------------------ BACK TO TOP BUTTON ------------------ */
-/*.footer-center button.back-to-top {
+/* Hide fallback by default */
+.back-to-top .fallback-arrow {
+  display: none;
+  font-size: 20px;
+  line-height: 1;
+  color: #fff;
+}
+
+/* Style the SVG */
+.back-to-top svg.back-to-top-icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  color: #fff;
+}
+
+/* Button styling */
+.footer-center button.back-to-top {
   background-color: var(--color-primary);
   border: none;
-  color: #fff;
-  font-size: 20px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   transition: background-color 0.3s, transform 0.2s;
 }
 
 .footer-center button.back-to-top:hover {
   background-color: var(--color-accent-1);
   transform: translateY(-2px);
-}
-
-.footer-center button.back-to-top span {
-  display: block;
-  line-height: 1;
-  font-size: 20px;
 }
 
 /* Back to top button animation */
@@ -2530,11 +2539,11 @@ textarea {
 }
 
 /* Temp debug outline */
-* {
+/** {
   outline: 1px solid red;
 }
 
 /* Temp debug overflow hide */
-  html, body {
+/*  html, body {
     overflow-x: hidden !important;
   }
