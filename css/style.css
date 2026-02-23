@@ -555,6 +555,11 @@ body {
     color: var(--color-primary-dark);
     font-weight: 700;
   }
+  
+  /* Reset hero text margins */  
+  .hero-text {
+	margin-left: 0%;
+  }
 }
 
 /* ================= FOOTER ================= */
@@ -602,7 +607,7 @@ body {
 }
 
 /* ------------------ BACK TO TOP BUTTON ------------------ */
-.footer-center button.back-to-top {
+/*.footer-center button.back-to-top {
   background-color: var(--color-primary);
   border: none;
   color: #fff;
@@ -1528,6 +1533,11 @@ body {
   .project-details {
     font-size: 14px;
     line-height: 1.6;
+	margin-top: 10px;
+  }
+  
+  .project-description h3{
+    line-height: 1.4;
   }
   
   .project-section-row {
@@ -2376,7 +2386,7 @@ textarea {
 @media (max-width: 1300px) {
 .contact-card {
   margin-left: 8%;
-  margin-top: 0%;
+  margin-top: -2%;
 }
 
 @media (max-width: 768px) {
@@ -2384,9 +2394,82 @@ textarea {
   .form-row {
     flex-direction: column;
   }
-
-  .contact-card {
-    padding: 24px;
+  
+  .contact-hero-text {
+	margin-left: 0%;
   }
 
+  .contact-card {
+    padding: 10px;
+	margin-left: -3%;
+  }
+
+}
+
+/* ================= MOBILE FINAL OVERRIDES ================= */
+@media (max-width: 768px) {
+/* Shift hamburger menu to the right */
+	.nav-toggle {
+	  margin-right: -16px;
+	}
+
+/* Widen hero blurb & make text slightly smaller */
+  .page-hero-content {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding-left: -40px;
+    padding-right: 8px;
+    margin-left: -22px;;
+    margin-right: auto;
+  }
+  
+  .page-hero-content p {
+	  font-size: 95%;
+  }
+}
+
+/* ================= BACK TO TOP GLYPH FIX ================= */
+/* Hide fallback by default */
+.back-to-top .fallback-arrow {
+  display: none;
+  font-size: 20px;
+  line-height: 1;
+  color: #fff;
+}
+
+/* Style the SVG */
+.back-to-top svg.back-to-top-icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  color: #fff;
+}
+
+/* Button styling */
+.footer-center button.back-to-top {
+  background-color: var(--color-primary);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.footer-center button.back-to-top:hover {
+  background-color: var(--color-accent-1);
+  transform: translateY(-2px);
+}
+
+/* Fallback for very old browsers (SVG not supported) */
+@supports not (mask-image: url()) {
+  .back-to-top svg.back-to-top-icon {
+    display: none;
+  }
+  .back-to-top .fallback-arrow {
+    display: block;
+  }
 }

@@ -55,7 +55,7 @@
 <main>
 
   <!-- ========== PROJECT PAGE ========== -->
-  <main class="project-page">
+  <main class="project-page" data-project="3d-art_project03_caillou">
 
     <!-- PROJECT HERO / TITLE -->
     <section class="project-hero">
@@ -338,11 +338,17 @@
     &copy; 2026 Andrés Francken
   </div>
 
-  <div class="footer-center">
-    <button class="back-to-top" aria-label="Back to top">
-      <span>⮝</span>
-    </button>
-  </div>
+	<div class="footer-center">
+	  <button class="back-to-top" aria-label="Back to top">
+		<!-- Primary: SVG arrow -->
+		<svg class="back-to-top-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+		  <line x1="12" y1="19" x2="12" y2="5"></line>
+		  <polyline points="5 12 12 5 19 12"></polyline>
+		</svg>
+		<!-- Fallback text arrow -->
+		<span class="fallback-arrow">↑</span>
+	  </button>
+	</div>
 
   <div class="footer-right">
     <a href="../files/Andres-Francken-CV.pdf" target="_blank">Download CV</a>
@@ -483,44 +489,42 @@ const projects = [
   }
 ];
 
-// Current page index
-const currentFile = window.location.pathname
-  .split('/')
-  .pop()
-  .replace('.html', '');
+// ===== Current page index via data attribute =====
+const projectPage = document.querySelector('.project-page');
 
-let currentIndex = projects.findIndex(p =>
-  p.url
-    .split('/')
-    .pop()
-    .replace('.html', '') === currentFile
-);
+if (!projectPage) {
+  console.warn('No project-page element found.');
+} else {
 
-if (currentIndex === -1) {
-  console.warn("Project not found in navigation list:", currentFile);
-  currentIndex = 0;
-}
+  const currentSlug = projectPage.dataset.project;
 
-// Previous / next indexes
-const prevIndex = (currentIndex - 1 + projects.length) % projects.length;
-const nextIndex = (currentIndex + 1) % projects.length;
+  let currentIndex = projects.findIndex(p =>
+    p.url.replace('.html', '') === currentSlug
+  );
 
-// DOM elements
-const prevLink = document.querySelector('.project-nav .prev-project');
-const nextLink = document.querySelector('.project-nav .next-project');
+  if (currentIndex === -1) {
+    console.warn("Project not found in navigation list:", currentSlug);
+    currentIndex = 0; // fallback safety
+  }
 
-if (prevLink && nextLink) {
-  // Update href
-  prevLink.href = projects[prevIndex].url;
-  nextLink.href = projects[nextIndex].url;
+  // Previous / next indexes
+  const prevIndex = (currentIndex - 1 + projects.length) % projects.length;
+  const nextIndex = (currentIndex + 1) % projects.length;
 
-  // Update images
-  prevLink.querySelector('img').src = projects[prevIndex].thumb;
-  nextLink.querySelector('img').src = projects[nextIndex].thumb;
+  const prevLink = document.querySelector('.project-nav .prev-project');
+  const nextLink = document.querySelector('.project-nav .next-project');
 
-  // Update text
-  prevLink.querySelector('span').textContent = "← " + projects[prevIndex].title;
-  nextLink.querySelector('span').textContent = projects[nextIndex].title + " →";
+  if (prevLink && nextLink) {
+
+    prevLink.href = projects[prevIndex].url;
+    nextLink.href = projects[nextIndex].url;
+
+    prevLink.querySelector('img').src = projects[prevIndex].thumb;
+    nextLink.querySelector('img').src = projects[nextIndex].thumb;
+
+    prevLink.querySelector('span').textContent = "← " + projects[prevIndex].title;
+    nextLink.querySelector('span').textContent = projects[nextIndex].title + " →";
+  }
 }
 </script>
 

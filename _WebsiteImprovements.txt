@@ -1,0 +1,3 @@
+Apply new up arrow to all subpages
+Reduce Line Height of Clients for double rows (i.e. Argylle)
+Smaller margins for contact page (both hero blurb and form)
